@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>01_HelloWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+      <servlet>
+    	<servlet-name>TestPerson1Servlet</servlet-name>
+    	<servlet-class>com.kh.servlet.TestPerson1Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+     <servlet-name>TestPerson1Servlet</servlet-name>
+	 <url-pattern>/testPerson1.do</url-pattern> <!-- /web/ 를 쓰지 않고 그 이후 값만 쓰면 됨. 위에있는 서블렛네임을 찾게 되고 그 밑에 있는 경로를 통해 -->     
+    </servlet-mapping>
+    
+    
+    
+    <servlet>
+    	<servlet-name>PostTest</servlet-name>
+    	<servlet-class>com.kh.servlet.TestPerson2Servlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>PostTest</servlet-name>
+		<url-pattern>/testPerson2.do</url-pattern>
+	</servlet-mapping>
+	
+	    <servlet>
+    	<servlet-name>JspTest</servlet-name>
+    	<servlet-class>com.kh.servlet.TestPerson3Servlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>JspTest</servlet-name>
+		<url-pattern>/testPerson3.do</url-pattern>
+	</servlet-mapping>
+	
+		    <servlet>
+    	<servlet-name>menuFrm</servlet-name>
+    	<servlet-class>com.kh.servlet.MenuOrder</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>menuFrm</servlet-name>
+		<url-pattern>/04_menu.do</url-pattern>
+	</servlet-mapping>
+	
+	
+</web-app>
