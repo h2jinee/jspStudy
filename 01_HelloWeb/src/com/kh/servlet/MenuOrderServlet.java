@@ -4,56 +4,60 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MenuOrder  extends HttpServlet{
+public class MenuOrderServlet  extends HttpServlet{
 	
 	@Override
 	public void doGet(HttpServletRequest request,
 					  HttpServletResponse response) 
 							  throws IOException, ServletException{
 		
+		//0. 인코딩처리
+		request.setCharacterEncoding("utf-8");
+		
 		//1. 사용자 요청 값 자바변수에 담기
-		String name = request.getParameter("name");
-		String color = request.getParameter("color");
-		String animal = request.getParameter("animal");
-		String[] foodArr = request.getParameterValues("food");
+		String main_menu = request.getParameter("main_menu");
+		String side_menu = request.getParameter("side_menu");
+		String drink_menu = request.getParameter("drink_menu");
 		
-		System.out.println("name="+name);
-		System.out.println("color="+color);
-		System.out.println("animal="+animal);
-		System.out.println("foodArr="+Arrays.toString(foodArr));
+		int main_menuTotal = 0;
+		int side_menuTotal = 0;
+		int drink_menuTotal = 0;
 		
-		
-		//2. 응답객체 작성하기
-		response.setContentType("text/html; charset=UTF-8");
-		
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<title> 개인취향 테스트 결과 페이지 </title>");
-		out.println("<style>");
-		out.println("h2{color:red;}");
-		out.println("span.name{color:lightblue;}");
-		out.println("span.color{color:lightgreen;}");
-		out.println("span.animal{color:lightsalmon;}");
-		out.println("span.food{color:lightseagreen;}");
-		out.println("</style>");
+		switch(main_menu) {
+		case "한우버거" : main_menuTotal = 5000; break;
+		case "치즈버거" : main_menuTotal = 4500; break;
+		case "밥버거" : main_menuTotal = 4000; break;
+ 		}
+		switch(side_menu) {
+		case "감자튀김" : side_menuTotal = 1500; break;
+		case "어니어링" : side_menuTotal = 1700; break;
+ 		}
+		switch(drink_menu) {
+		case "콜라" : drink_menuTotal = 1000; break;
+		case "사이다" : drink_menuTotal = 1000; break;
+		case "커피" : drink_menuTotal = 1500; break;
+		case "밀크쉐이크" : drink_menuTotal = 2500; break;
+ 		}
 		
 		
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<h2>개인 취향 테스트 결과페이지(GET)</h2>");
-		out.printf("<span class='name'>%s</span>님의 개인취향은", name);
-		out.printf("<span class='color'>%s</span>색을 좋아하고", color);
-		out.printf("<span class='animal'>%s</span>을 좋아합니다.", animal);
-		out.printf("좋아하는 음식은 <span class='food'>%s</span>입니다.", Arrays.toString(foodArr));
+		//2. total
+		request.setAttribute("main_menuTotal", main_menuTotal);
+		request.setAttribute("side_menuTotal", side_menuTotal);
+		request.setAttribute("drink_menuTotal", drink_menuTotal);
 		
-		out.println("</body>");
-		out.println("</html>");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/jsp/menuOrder.jsp");
+		reqDispatcher.forward(request, response);
+
+//		@Override
+//		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//			doGet(request, response);
+//		}
 		
 		
 	}

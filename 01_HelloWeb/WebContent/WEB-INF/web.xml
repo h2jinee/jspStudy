@@ -36,12 +36,12 @@
 	</servlet-mapping>
 	
 		    <servlet>
-    	<servlet-name>menuFrm</servlet-name>
-    	<servlet-class>com.kh.servlet.MenuOrder</servlet-class>
+    	<servlet-name>MenuOrderServlet</servlet-name>
+    	<servlet-class>com.kh.servlet.MenuOrderServlet</servlet-class>
     </servlet>
 	<servlet-mapping>
-		<servlet-name>menuFrm</servlet-name>
-		<url-pattern>/04_menu.do</url-pattern>
+		<servlet-name>MenuOrderServlet</servlet-name>
+		<url-pattern>/menuOrder.do</url-pattern>
 	</servlet-mapping>
 	
 	

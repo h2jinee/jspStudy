@@ -42,11 +42,11 @@ public class TestPerson3Servlet  extends HttpServlet{
 		//업무로직 : 사용자 선호색상에 따라 추천기능
 		String recommendation = "";
 		switch(color) {
-		case "빨강" : recommendation = "빨간 립스틱"; break;
-		case "노랑" : recommendation = "노란 스카프"; break;
-		case "초록" : recommendation = "초록 우산"; break;
-		case "파랑" : recommendation = "파랑 모자"; break;
- 		}
+		case "빨강": recommendation = "빨간 립스틱"; break;
+		case "노랑": recommendation = "노란 스카프"; break;
+		case "초록": recommendation = "초록 우산"; break;
+		case "파랑": recommendation = "파란 모자"; break;
+		}
 		
 		//request객체에 속성으로써 변수 저장 : key - value 형식 (like USB)
 		//request에 저장해두면 jsp에서 setAttribute메소드로 접근 할 수 있다.

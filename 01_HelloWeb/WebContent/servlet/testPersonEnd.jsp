@@ -15,6 +15,7 @@
 	String animal = request.getParameter("animal");
 	String[] foodArr = request.getParameterValues("food");
 	
+	//request객체에 속성으로 저장된 recommendation의 값 가져오기
 	String recommendation = (String)request.getAttribute("recommendation");
 	
 	System.out.println("name@jsp="+name);
@@ -23,7 +24,6 @@
 	System.out.println("foodaArr@jsp="+Arrays.toString(foodArr));
 	System.out.println("recommendation@jsp="+recommendation);
 	
-	//request객체에 속성으로 저장된 recommendation의 값 가져오기
 %>    
 
 <!DOCTYPE html>
