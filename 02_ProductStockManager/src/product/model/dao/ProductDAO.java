@@ -306,6 +306,49 @@ public class ProductDAO {
 		
 		return result;
 	}
-	
+	public List<ProductIO> selectIOListByPId(Connection conn, String productId) throws ProductException{
+		List<ProductIO> ioList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectIOListByPId");
+//		selectIOListByPId
+		System.out.println(query);
+		
+		try {
+			//1. statement 객체생성
+			pstmt = conn.prepareStatement(query);
+			//2. 미완성쿼리 값대입하기
+			pstmt.setString(1, productId);
+			//3. 쿼리실행 => ResultSet객체
+			rset = pstmt.executeQuery();
+			//4. ResultSet => Collection객체
+			ioList = new ArrayList<>();
+			
+			while(rset.next()) {
+				//1행 => ProductIO객체
+				ProductIO pio = new ProductIO();
+				pio.setIoNo(rset.getInt("io_no"));
+				pio.setProductId(rset.getString("product_id"));
+				pio.setAmount(rset.getInt("amount"));
+				pio.setIoDate(rset.getDate("iodate"));
+				pio.setStatus(rset.getString("status"));
+				
+				ioList.add(pio);
+				
+			}
+			
+			System.out.println("ioList@DAO="+ioList);
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+			
+			throw new ProductException("입출고 내역조회 에러: "+productId, e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return ioList;
+	}
 	
 }

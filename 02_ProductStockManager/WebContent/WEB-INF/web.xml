@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 공용에러페이지 설정 -->
+  <!--  <error-page>
+  	<exception-type>java.lang.Exception</exception-type>
+  	<location>/jsp/common/error.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/jsp/common/error.jsp</location>
+  </error-page> -->
 </web-app>

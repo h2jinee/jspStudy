@@ -22,13 +22,15 @@
 	
 	//4. 사용자 view단 처리(피드백 : 잘 등록 되었습니다, 오류가 발생하였습니다. 등) : msg.jsp로 위임
 	String msg = "";
+	String loc = "/";
+	
 	if(result > 0){
 		msg = "상품 등록 성공!";
+		loc = "/jsp/product/productView.jsp?productId="+productId;
 	}
 	else {
 		msg = "상품 등록 실패!";
 	}
-	String loc = "/";
 	
 	//변수 속성 저장
 	request.setAttribute("msg", msg);

@@ -1,11 +1,9 @@
 package product.model.service;
-
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import common.JDBCTemplate;
 import product.model.dao.ProductDAO;
 import product.model.exception.ProductException;
@@ -13,6 +11,13 @@ import product.model.vo.Product;
 import product.model.vo.ProductIO;
 
 public class ProductService {
+	public List<ProductIO> selectIOListByPId(String productId) throws ProductException{
+		List<ProductIO> ioList = null;
+		Connection conn = getConnection();
+		ioList = new ProductDAO().selectIOListByPId(conn, productId);
+		close(conn);
+		return ioList;
+	}
 
 	public int insertProduct_IO(ProductIO pio) throws ProductException {
 		Connection conn = getConnection();

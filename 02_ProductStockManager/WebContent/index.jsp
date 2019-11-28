@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="/jsp/common/error.jsp"%>
 <%@ page import="product.model.service.*,
 				 product.model.vo.*,
 				 product.model.exception.*,
@@ -12,7 +12,9 @@
 	//list.clear();
 	List<ProductIO> ioList = productService.selectProductIOList();
 	//System.out.println("ioList@jsp="+ioList);
+
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
