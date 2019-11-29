@@ -351,4 +351,49 @@ public class ProductDAO {
 		return ioList;
 	}
 	
+	public List<Product> selectByPId(Connection conn, String productId) throws ProductException {
+		List<Product> list = null;
+		
+		//사용후 반납해야할(close)자원들은 try~catch문 바깥에서 선언해야 한다.
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectByPId");
+		
+		try {
+			//1. 쿼리문을 실행할 statement객체 생성
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+productId+"%");
+			
+			//2. 쿼리문 전송, 실행결과 받기
+			rset = pstmt.executeQuery();
+			
+			//3. 받은 결과값들을 객체에 옮겨 저장하기
+			list = new ArrayList<>();
+			
+			while(rset.next()){
+				Product p = new Product();
+				//컬럼명은 대소문자 구분이 없다.
+				p.setProductId(rset.getString("product_id"));
+				p.setProductName(rset.getString("product_name"));
+				p.setPrice(rset.getInt("price"));
+				p.setDescription(rset.getString("description"));
+				p.setStock(rset.getInt("stock"));
+				list.add(p);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();//콘솔로깅용으로 남겨둠
+			//사용자 정의 예외 던짐.
+			throw new ProductException("selectByPName 메소드 에러! : "+e.getMessage());
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
 }

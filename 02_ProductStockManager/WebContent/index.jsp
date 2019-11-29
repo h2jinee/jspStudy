@@ -39,7 +39,24 @@ $(function(){
 		
 		location.href = "<%=request.getContextPath()%>/jsp/product/productView.jsp?productId="+productId;
 	});
+	
+	$("[name=srchType]").change(function(){
+		var id = $(this).attr("id");
+		if(id === 'productId')
+			$("#srchKeyword").attr("placeholder","검색할 상품 아이디를 입력하세요.").focus();
+		else
+			$("#srchKeyword").attr("placeholder","검색할 상품명을 입력하세요.").focus();
+	});
 });
+
+function srchValidate(){
+	var len = $("#srchKeyword").val().trim().length;
+	if(len == 0){
+		alert("검색어를 입력하세요.");
+		return false;
+	}
+	return true;
+}
 </script>
 <style>
 button#btn-add{
