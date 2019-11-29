@@ -50,7 +50,7 @@ public class MemberLoginCheckServlet extends HttpServlet {
         }
         
         // 4. view
-        
+        //commitTest
     }
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
