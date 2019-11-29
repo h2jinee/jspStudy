@@ -1,21 +1,36 @@
 package product.model.service;
-import static common.JDBCTemplate.*;
+
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
-import common.JDBCTemplate;
+
 import product.model.dao.ProductDAO;
 import product.model.exception.ProductException;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 
 public class ProductService {
-	public List<ProductIO> selectIOListByPId(String productId) throws ProductException{
+	
+	public List<Product> selectByPId(String productId) throws ProductException{
+		Connection conn = getConnection();
+		List<Product> list = new ProductDAO().selectByPId(conn, productId);
+		close(conn);
+		return list;
+	}
+	
+	public List<ProductIO> selectIOListByPId(String productId) 
+				throws ProductException{
 		List<ProductIO> ioList = null;
 		Connection conn = getConnection();
+		
 		ioList = new ProductDAO().selectIOListByPId(conn, productId);
+		
 		close(conn);
+		
 		return ioList;
 	}
 

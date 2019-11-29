@@ -126,15 +126,14 @@ section#srch-container{
 				if(!list.isEmpty()){
 					for(int i=0; i<list.size(); i++){
 						Product p = list.get(i);
-						//System.out.println(p);
 			%>
-					<tr productId="<%=p.getProductId() %>">
+					<tr productId="<%=p.getProductId()%>">
 						<td><%=p.getProductId() %></td>
 						<td><%=p.getProductName() %></td>
 						<td><%=p.getPrice() %></td>
 						<td><%=p.getStock() %></td>
 					</tr>
-			<%      }
+			<%  	}
 				}
 				else{
 			%>
@@ -142,7 +141,6 @@ section#srch-container{
 						<td colspan="4">상품이 존재하지 않습니다.</td>
 					</tr>
 			<%
-			
 				}
 			%>
 			</tbody>
@@ -166,16 +164,16 @@ section#srch-container{
 			<%
 				if(!ioList.isEmpty()){
 					for(int i=0; i<ioList.size(); i++){
-					ProductIO pio = ioList.get(i);			
+						ProductIO pio = ioList.get(i);						
 			%>
-				<tr productId="<%=pio.getProductId() %>">
+				<tr productId="<%=pio.getProductId()%>">
 					<td><%=pio.getIoNo() %></td>
 					<td><%=pio.getProductId() %></td>
 					<td><%=pio.getIoDate() %></td>
 					<td><%=pio.getAmount() %></td>
-					<td><%=("I".equals(pio.getStatus())? "입고" : "출고") %></td>
+					<td><%=("I".equals(pio.getStatus())?"입고":"출고")%></td>
 				</tr>
-			<%
+			<%		
 					}
 				}
 				else{
@@ -183,20 +181,24 @@ section#srch-container{
 				<tr>
 					<td colspan="5">입출고 내역이 없습니다.</td>
 				</tr>
-			<%
+			<%		
 				}
 			%>
+			
+			
 			</tbody>
 		</table>
 	</section>
 	<section id="srch-container">
-		<form name="srchFrm" action="<%=request.getContextPath()%>/jsp/product/productFinder.jsp">
+		<form name="srchFrm" 
+			  action="<%=request.getContextPath()%>/jsp/product/productFinder.jsp">
 			<input type="radio" name="srchType" id="productId" value="productId" checked/><label for="productId">상품아이디</label>
 			<input type="radio" name="srchType" id="productName" value="productName" /><label for="productName">상품명</label>
 			<br /><br />
 			<input type="search" name="srchKeyword" id="srchKeyword" size=25 placeholder="검색할 아이디를 입력하세요."/>
 			<br /><br />
-			<input type="submit" onclick="return srchValidate();" value="검색" />
+			<input type="submit" 
+				   onclick="return srchValidate();" value="검색" />
 		</form>
 	</section>
 </div>

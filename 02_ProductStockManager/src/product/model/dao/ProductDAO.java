@@ -49,7 +49,7 @@ public class ProductDAO {
 		} catch (Exception e) {
 			e.printStackTrace();//콘솔로깅용으로 남겨둠
 			//사용자 정의 예외 던짐.
-			throw new ProductException("insertProduct_IO 입고메소드  요류 : "+e.getMessage());
+			throw new ProductException("insertProduct_IO 입고메소드  오류 : "+e.getMessage());
 		} finally {
 			close(pstmt);
 		}
