@@ -1,13 +1,40 @@
 jsp 공부를 위한 공간
 
-jsp란?
+JSP란?
+Java Server Pages : HTML 코드에 JAVA 코드를 넣어 동적웹페이지를 생성하는 웹어플리케이션 도구이다.
+                    JSP 가 실행되면 자바 서블릿(Servlet) 으로 변환되며 웹 어플리케이션 서버에서 동작되면서 필요한 기능을 수행하고 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답한다.
+
+출처: https://javacpro.tistory.com/43 [버물리의 IT공부]
 
 get / post 방식
+: 
 
 servlet
 :
-scriptlet
-:
 
-동적바인딩
+<%@ %> : 지시자(page, include, taglib)
+<% %>   : 스크립틀릿(scriptlet)
+<%= %> : 표현식
+자바식 이 대입될수 있고 자바식은 상수나 변수 이름, 연산자를 포함한 식 또는 리턴 값이 있는 메서드 호출식이 될 수도 있다.
+
+출처: https://leechwin.tistory.com/entry/JSP-Scriptlet [Library of developer]
+
+동적바인딩 : 런타임 시에 알 수 있는 것.
+정적바인딩 : 컴파일 시에 알 수 있는 것.
+
+Contect : <%=request.getContextPath()%>
+URI : <%=request.getRequestURI()%>
+URL : <%=request.getRequestURL()%>
+Path : <%=request.getServletPath()%>
+
+request.getContextPath() : 프로젝트 path만 얻어온다.
+예) http://localhost:8081/board/list.jsp
+     return: /board
+
+request.getRequestURI() : 프로젝트와 파일경로까지 얻어온다.
+예) http://localhost:8081/board/list.jsp
+     return: /board/list.jsp
+
+String url = request.getRequestURI.split("/");
+String fName = url[url.length -1]; //list.jsp
 
