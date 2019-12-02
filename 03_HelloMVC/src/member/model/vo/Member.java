@@ -3,7 +3,10 @@ package member.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Member implements Serializable{
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class Member implements Serializable, HttpSessionBindingListener{
 	/**
 	 * 
 	 */
@@ -109,6 +112,24 @@ public class Member implements Serializable{
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName + ", gender="
 				+ gender + ", age=" + age + ", email=" + email + ", phone=" + phone + ", address=" + address
 				+ ", hobby=" + hobby + ", enrollDate=" + enrollDate + "]";
+	}
+	
+	/**
+	 * 세션속성으로 해당객체가 등록될 때 호출됨
+	 */
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		System.out.println("["+memberId+"]님이 ["+new java.util.Date()+"]에 로그인 하셨습니다.");
+	}
+	
+	/**
+	 * 세션속성에 등록된 해당객체가 해제될 때 호출됨.
+	 */
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		System.out.println("["+memberId+"]님이 ["+new java.util.Date()+"]에 로그아웃 하셨습니다.");
+		// TODO Auto-generated method stub
+		
 	}
 	
 
