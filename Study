@@ -46,6 +46,8 @@ MVC 패턴에서 Controller로 이용된다.
 HTTP 프로토콜 서비스를 지원하는 javax.servlet.http.HttpServlet 클래스를 상속받는다. UDP보다 속도가 느리다.
 HTML 변경 시 Servlet을 재컴파일해야 하는 단점이 있다.
 
+https://mangkyu.tistory.com/14?category=761303
+
 <%@ %> : 지시자(page, include, taglib)
 <% %>   : 스크립틀릿(scriptlet)
 <%= %> : 표현식
