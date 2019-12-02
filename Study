@@ -1,12 +1,12 @@
 jsp 공부를 위한 공간
 
-✔ JSP란?
+✅ JSP란?
 Java Server Pages : HTML 코드에 JAVA 코드를 넣어 동적웹페이지를 생성하는 웹어플리케이션 도구이다.
                     JSP 가 실행되면 자바 서블릿(Servlet) 으로 변환되며 웹 어플리케이션 서버에서 동작되면서 필요한 기능을 수행하고 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답한다.
 
 출처: https://javacpro.tistory.com/43 [버물리의 IT공부]
 
-get / post 방식
+✅ get / post 방식
 
 1. GET방식
 
@@ -29,7 +29,7 @@ URL에 데이터가 노출되지 않아서 기본 보안은 되어있다.
 Q) Cashing(캐싱)이란?
 캐싱이란 한번 접근 후, 또 요청할시 빠르게 접근하기 위해 레지스터에 데이터를 저장시켜 놓는 것.
 
-서블릿(Servlet)
+✅ 서블릿(Servlet)
 : 웹프로그래밍에서 클라이언트의 요청을 처리하고 그 결과를 다시 클라이언트에게 전송하는 Servlet 클래스의 구현 규칙을 지킨 자바 프로그래밍 기술
 
 간단히 말해서, 서블릿이란 자바를 사용하여 웹을 만들기 위해 필요한 기술입니다. 그런데 좀더 들어가서 설명하자면 
@@ -48,6 +48,7 @@ HTML 변경 시 Servlet을 재컴파일해야 하는 단점이 있다.
 
 https://mangkyu.tistory.com/14?category=761303
 
+✅
 <%@ %> : 지시자(page, include, taglib)
 <% %>   : 스크립틀릿(scriptlet)
 <%= %> : 표현식
@@ -55,14 +56,17 @@ https://mangkyu.tistory.com/14?category=761303
 
 출처: https://leechwin.tistory.com/entry/JSP-Scriptlet [Library of developer]
 
+✅
 동적바인딩 : 런타임 시에 알 수 있는 것.
 정적바인딩 : 컴파일 시에 알 수 있는 것.
 
+✅
 Contect : <%=request.getContextPath()%>
 URI : <%=request.getRequestURI()%>
 URL : <%=request.getRequestURL()%>
 Path : <%=request.getServletPath()%>
 
+✅
 request.getContextPath() : 프로젝트 path만 얻어온다.
 예) http://localhost:8081/board/list.jsp
      return: /board
@@ -75,6 +79,7 @@ String url = request.getRequestURI.split("/");
 String fName = url[url.length -1]; //list.jsp
 
 //
+✅
 Server Options 섹션에서 'Serve modules without publishing'을 체크하게 되면..
 
 페이지의 수정사항이 별도의 폴더에 복사되기를 기다릴 필요 없이 바로 확인할 수 있습니다.
@@ -92,11 +97,11 @@ Server Options 섹션에서 'Serve modules without publishing'을 체크하게 �
 
 -----------------------------------------------------------------------
 
-forward()
+✅ forward()
 : - forward 액션 태그는 다른 페이지로 프로그램의 제어를 이동할 때 사용되는 액션 태그이다.
 - JSP 페이지 내에 forward 액션 태그를 만나게 되면, 그전까지 출력 버퍼에 저장되어 있던 내용을 제거하고 forward 액션 태그가 지정하는 페이지로 이동한다.
 
-포워딩(Forwarding)
+✅ 포워딩(Forwarding)
 : 어떠한 요청을 받았을 때 그것을 직접 처리하지 않고 다른 쪽으로 위임하는 것.
 
 포워딩은 JSP서블릿에서 2가지 클래스를 이용한다. (RequestDispatcher 클래스, HttpServletResponse 클래스)
@@ -115,7 +120,7 @@ HttpServletResponse 클래스는 RequestDispatcher 클래스와 동일하게 요
 
 출처 : https://rwd337.tistory.com/33?category=650715
 
-@WebServlet 이란
+✅ @WebServlet 이란
 @WebServlet의 속성 값을 통해 해당 Servlet과 매핑될 URL 패턴을 지정한다.
 이 Annotation을 통해 web.xml 파일에 별로의 설정을 하지 않더라도 해당 Servlet을 실행할 수 있다.
 
@@ -136,12 +141,17 @@ value 속성 외에 다른 속성의 값도 필요한 경우는 속성의 이름
 
 https://gmlwjd9405.github.io/2018/12/22/webservlet-annotation.html
 
-세션(Session)이란?
+✅ 세션(Session)이란?
 
 세션은 쿠키와 다르게 사용자의 정보가 서버에 저장된다.
 세션을 클라이언트마다 개별적으로 유지하기 위해 HttpSession 객체가 생성될때
 요청을 보내온 클라리언트 정보, 요청시간 정보 등을 조합한 세션ID가 부여되며 이 세션ID가 쿠키 기술로 저장된다.
 
-setAttribute 속성
-
-
+✅ 속성 처리 메소드
+        
+                메소드                     리턴타입                        설명
+-----------------------------------------------------------------------------------------------------------------------------------------
+setAttribute(String name, Object value)     void      이름이 name인 속성의 값을 value로 지정합니다.
+getAttribute(String name)                  Object     이름이 name인 속성의 값을 구함. 지정한 이름의 속성이 존재하지 않을 경우 null 리턴.
+removeAttribute(String name)                void      이름이 name인 속성을 삭제
+getAttributeNames()                 java.util.Enumeration   속성의 이름 목록을 구함
