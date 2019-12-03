@@ -47,6 +47,11 @@
     	var popup = open("", title, spec); //""은 url
     	
     	var frm = document.checkIdDuplicateFrm;
+    	frm.action = url;
+    	frm.target = title;
+    	frm.method = "POST";
+    	frm.memberId.value = $memberId.val().trim();
+    	frm.submit();
     	
     }
     
@@ -63,6 +68,7 @@
 				<th>아이디</th>
 				<td>
 					<input type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
+					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
 				</td>
 			</tr>
 			<tr>
