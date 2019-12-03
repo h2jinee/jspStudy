@@ -71,4 +71,37 @@ public class MemberDAO {
 		
 	}
 	
+
+	public int insertMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertMember"); 
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			//쿼리문미완성
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPassword());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getGender());
+			pstmt.setInt(5, member.getAge());
+			pstmt.setString(6, member.getEmail());
+			pstmt.setString(7, member.getPhone());
+			pstmt.setString(8, member.getAddress());
+			pstmt.setString(9, member.getHobby());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

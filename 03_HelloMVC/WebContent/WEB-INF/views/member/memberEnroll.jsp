@@ -27,7 +27,34 @@
     	return true;
     }
     
+    /*
+    * 아이디 중복 검사 함수 : 팝업창
+    */
+    function checkIdDuplicate(){
+    	var $memberId = $("#memberId_");
+    	//유효성검사
+    	if($memberId.val().trim().length < 4){
+    		alert("아이디는 4글자 이상이어야 합니다.");
+    		return;
+    	}
+    	
+    	//폼을 팝업창에 제출
+    	//frm.target = 팝업창이름
+    	var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
+    	//팝업창 이름, 타겟속성 지정
+    	var title = "checkIdDuplicatePopup";
+    	var spec = "left=500px, top=100px, width=300px, height=200px";
+    	var popup = open("", title, spec); //""은 url
+    	
+    	var frm = document.checkIdDuplicateFrm;
+    	
+    }
+    
     </script>
+    <!-- 아이디 중복검사 폼 -->
+    <form name="checkIdDuplicateFrm">
+    	<input type="hidden" name="memberId" />
+    </form>
     <section id=enroll-container>
         <h2>회원 가입 정보 입력</h2>
         <form action="memberEnrollEnd" name="memberEnrollFrm" method="post" onsubmit="return enrollValidate();" >
