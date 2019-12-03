@@ -15,7 +15,7 @@ import member.model.vo.Member;
  * Servlet implementation class CheckDuplicateServlet
  */
 @WebServlet("/member/checkIdDuplicate")
-public class CheckDuplicateServlet extends HttpServlet {
+public class CheckIdDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

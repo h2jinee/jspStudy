@@ -13,17 +13,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberEnrollEndServlet
+ * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/member/memberEnrollEnd")
-public class MemberEnrollEndServlet extends HttpServlet {
+@WebServlet("/member/memberUpdate")
+public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		https://stackoverflow.com/questions/11229986/get-string-character-by-index-java
 		//1. encoding
 		request.setCharacterEncoding("utf-8");
 		
@@ -53,13 +52,13 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		//3. business logic
 		//현재 가입되어있는 memberId와 비교하여 중복 방지
-		Member m = new MemberService().selectOne(memberId);
+		int result = new MemberService().updateMember(member);
 		
 		String msg = "";
 		String loc = "/";
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		
-		if(m == null) {
+		if(result == null) {
 			msg = "존재하지 않는 아이디입니다.";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
@@ -74,6 +73,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -79,3 +79,8 @@ footer			{ background-color:#00bcd4; clear:both; height:75px; text-align:center;
     section#enroll-container table{margin:0 auto;}
     section#enroll-container table th {padding:0 10px; text-align:right;}
     section#enroll-container table td {padding:0 10px; text-align:left;}
+    
+    /* 회원수정페이지 */
+    section#enroll-container input[readonly]{
+    	background: lightgray;
+    }

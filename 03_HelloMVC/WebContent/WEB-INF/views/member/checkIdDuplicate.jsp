@@ -21,13 +21,42 @@ span#duplicated {
 	
 }
 </style>
+<script>
+/*
+ * 아이디 중복 검사 함수 : 팝업창
+ */
+ function checkIdDuplicate(){
+ 	var $memberId = $("#memberId_");
+ 	//유효성검사
+ 	if($memberId.val().trim().length < 4){
+ 		alert("아이디는 4글자 이상이어야 합니다.");
+ 		return;
+ 	}
+ 	
+ 	var frm = document.checkIdDuplicateFrm;
+ 	frm.memberId.value = $memberId.val().trim();
+ 	frm.submit();
+ 	
+ }
+ function setMemberId(){
+	 var memberId = "<%=memberId%>";
+	 //부모창의 폼 접근
+	 var frm = opener.memberEnrollFrm;
+	 frm.memberId.value = memberId;
+	 frm.idValid.value = 1;
+	
+	 frm.password.focus();
+	 
+	 self.close();
+ }
+</script>
 </head>
 <body>
 	<div id="checkId-container">
 	<% if(isUsable) { %>
 		[<span><%=memberId %></span>]는 사용가능합니다.
 		<br /><br />
-		<button type="button" onclick="self.close();">사용</button>
+		<button type="button" onclick="setMemberId();">사용</button>
 	<% }
 		else {
 	%>
@@ -35,9 +64,9 @@ span#duplicated {
 		<br /><br />
 		
 		<form action="<%=request.getContextPath()%>/member/checkIdDuplicate" name="checkIdDuplicateFrm" method="post">
-		<input type="text" name="memberId" id="memberId" placeholder="아이디를 입력하세요."/>
+		<input type="text" name="memberId" id="memberId_" placeholder="아이디를 입력하세요."/>
 		&nbsp;&nbsp;
-		<input type="button" value="아이디 중복 검사" />
+		<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
 		
 		</form>
 	<%

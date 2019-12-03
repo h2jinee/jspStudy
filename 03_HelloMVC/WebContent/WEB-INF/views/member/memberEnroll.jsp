@@ -13,6 +13,12 @@
     			$pwd2.val('');
     		}
     	});
+    	
+    	//아이디 중복검사 이후 아이디를 변경한 경우
+    	//change이벤트는 blur할 경우 값 변경 내역을 감지한다.
+    	$("#memberId_").change(function(){
+    		$("#idValid").val(0);
+    	});
     });
     
     /*
@@ -22,8 +28,15 @@
     	var $memberId = $("#memberId_");
     	if($memberId.val().trim().length < 4){
     		alert("아이디는 4글자 이상 가능합니다.");
-    		return;
+    		return false;
     	}
+    	
+    	var $idValid = $("#idValid");
+    	if($idValid.val() == 0){
+    		alert("아이디 중복 검사 해주세요.");
+    		return false;
+    	}
+    	
     	return true;
     }
     
@@ -69,6 +82,8 @@
 				<td>
 					<input type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
 					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
+					<%-- 아이디 중복 검사 후 사용가능한 아이디를 선택했을 때 => value= 1 --%>
+					<input type="hidden" id="idValid" value="0" /> 
 				</td>
 			</tr>
 			<tr>
