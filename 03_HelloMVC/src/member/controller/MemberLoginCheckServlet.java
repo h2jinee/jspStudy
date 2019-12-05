@@ -39,7 +39,7 @@ import member.model.vo.Member;
  */
 //HttpServlet은 Apache Tomcat에 있기 때문에 언바운드되거나 import가 되지 않을 경우 이 곳에서 문제가 발생한 것
 
-@WebServlet("/member/loginCheck")
+@WebServlet(name="MemberLoginCheckServlet", urlPatterns="/member/loginCheck")
 public class MemberLoginCheckServlet extends HttpServlet {
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) 

@@ -32,13 +32,19 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
 function deleteMember(){
-	var memberId = "<%=m.getMemberId()%>";
+	if(!confirm("정말 삭제하시겠습니까?")) 
+		return;
+	
+	$("[name=delFrm]").submit();
 	
 }
 </script>
 		<section id=enroll-container>
         <h2>회원 정보 보기 및 수정</h2>
-        <form action="/member/memberUpdate" name="memberUpdateFrm" method="post" onsubmit="return updateValidate();" >
+        <form action="<%=request.getContextPath()%>/member/memberDeleteServlet" name="delFrm" method="post">
+        	<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />
+        </form>
+        <form action="<%=request.getContextPath()%>/member/memberUpdate" name="memberUpdateFrm" method="post" onsubmit="return updateValidate();" >
         <table>
 			<tr>
 				<th>아이디</th>
@@ -47,6 +53,7 @@ function deleteMember(){
 				</td>
 			</tr>
 			<tr>
+			<%-- 
 				<th>패스워드</th>
 				<td>
 					<input type="password" name="password" id="password_" value="<%=m.getPassword()%>" required><br>
@@ -57,7 +64,8 @@ function deleteMember(){
 				<td>	
 					<input type="password" id="password_2" value="<%=m.getPassword()%>" required><br>
 				</td>
-			</tr>  
+			</tr>
+			--%>  
 			<tr>
 				<th>이름</th>
 				<td>	
@@ -118,8 +126,18 @@ function deleteMember(){
 			</tr>
 		</table>
 		<input type="submit" value="정보수정">
+		<input type="button" value="비밀번호변경" onclick="updatePassword();">
 		<input type="reset" value="초기화">
 		<input type="button" value="탈퇴" onclick="deleteMember();">
         </form>
     </section>
+<script>
+function updatePassword(){
+	var url = "<%=request.getContextPath()%>/member/updatePassword?memberId=<%=m.getMemberId()%>";
+	var title = "updatePasswordPopup";
+	var spec = "left=500px, top=200px, width=400px, height=210px";
+	
+	open(url, title, spec);
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

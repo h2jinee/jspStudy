@@ -8,7 +8,6 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import member.model.dao.MemberDAO;
-import member.model.exception.MemberException;
 import member.model.vo.Member;
 
 public class MemberService {
@@ -34,7 +33,18 @@ public class MemberService {
 		return result;
 	}
 	
-	public int deleteMember(String memberId) throws MemberException{
+	public int updateMember(Member member) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().updateMember(conn, member);
+		
+		//트랜잭션 처리
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+	
+	public int deleteMember(String memberId) {
 		Connection conn = getConnection();
 		int result = new MemberDAO().deleteMember(conn, memberId);
 		
@@ -45,14 +55,14 @@ public class MemberService {
 		return result;
 	}
 	
-	public int updateMember(Member member) throws MemberException {
+	public int updatePassword(Member member) {
 		Connection conn = getConnection();
-		int result = new MemberDAO().updateMember(conn, member);
-		
-		//트랜잭션 처리
-		if(result>0) commit(conn);
-		else rollback(conn);
-		
+		int result = new MemberDAO().updatePassword(conn, member);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
 		return result;
 	}
 

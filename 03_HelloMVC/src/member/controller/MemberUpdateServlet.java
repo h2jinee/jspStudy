@@ -15,7 +15,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/member/memberUpdate")
+@WebServlet(name="MemberUpdateServlet", urlPatterns="/member/memberUpdate")
 public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +28,14 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		//2. parameter handling
 		String memberId = request.getParameter("memberId");
-		String password = request.getParameter("password");
+		//String password = request.getParameter("password");
 		String memberName = request.getParameter("memberName");
 		int age = Integer.parseInt(request.getParameter("age"));
-		String email = request.getParameter("email");
-		int phone = Integer.parseInt("phone");
-		String address = request.getParameter("address");
 		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		
 				
 		//hobby: String[] => ,를 사용해 문자열 합침 => 단일문자열
 		//hobby=게임&등산=등산 -> "게임,등산"
@@ -50,25 +51,35 @@ public class MemberUpdateServlet extends HttpServlet {
 		//파라미터로 전달한 문자열배열이 null이면, NullPointerException유발.
 		if(hobbies!=null) hobby = String.join(",", hobbies);
 		
-		//3. business logic
-		//현재 가입되어있는 memberId와 비교하여 중복 방지
+		Member member = new Member(memberId, null, memberName, gender, age, email, phone, address, hobby.toString(), null);
+
+		System.out.println("입력한 회원정보 : "+member);
+		
+		//3.서비스로직호출
 		int result = new MemberService().updateMember(member);
 		
+		//4. 받은 결과에 따라 뷰페이지 내보내기
+		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = "/";
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
-		if(result == null) {
-			msg = "존재하지 않는 아이디입니다.";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			reqDispatcher.forward(request, response);
-			
-		}
-		
-		//4. view단 처리 : msg.jsp -> /mvc
-	}
+		String loc = "/member/memberView?memberId="+memberId;
 
+		if(result>0) {
+			
+			msg = "성공적으로 회원수정했습니다.";
+			//현재 session에 저장된 memberLoggedIn객체 반영
+			request.getSession().setAttribute("memberLoggedIn", member);
+		}
+		else 
+			msg = "회원수정에 실패했습니다.";	
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+		reqDispatcher.forward(request, response);
+
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

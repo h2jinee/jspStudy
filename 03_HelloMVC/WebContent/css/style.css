@@ -2,10 +2,11 @@
 body {font-family:"휴먼모음T";}
 div, section, header, aside, footer {padding:10px;}
 /********** 전체컨테이너 **********/
-div#container	{background:url('/mvc/images/Java-Servlets-JSP.png') 21% 5%/18% no-repeat; background-color:#F0F0F0; width:960px; margin:0 auto;}
+div#container	{background-color:#F0F0F0; width:960px; margin:0 auto;}
 /********** header **********/
-header			{background-color:#00bcd4; height:130px; position:relative; padding:10px 0 0 0;}
+header			{background:url('/mvc/images/Java-Servlets-JSP.png') 21% 5%/18% no-repeat; background-color:#00bcd4; height:130px; position:relative; padding:10px 0 0 0;}
 header h1 		{margin-left:10px;}
+
 header div.login-container{
 	width: 250px;
 	position: absolute;

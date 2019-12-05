@@ -13,17 +13,17 @@
 	
 	Cookie[] cookies = request.getCookies();
 	if(cookies != null) {
-		System.out.println("------------------------------------------");
+		//System.out.println("------------------------------------------");
 		for(Cookie c : cookies){
 			String k = c.getName();
 			String v = c.getValue();
-			System.out.println(k + " = " + v);
+			//System.out.println(k + " = " + v);
 			if("saveId".equals(k)){
 				saveId = true;
 				memberId = v;
 			}
 			
-			System.out.println("------------------------------------------f");
+			//System.out.println("------------------------------------------");
 		}
 	}
 	
@@ -121,6 +121,11 @@ function goMemberEnroll(){
 					<li class="home"><a href="<%=request.getContextPath()%>">Home</a></li>
 					<li class="notice"><a href="#">공지사항</a></li>
 					<li class="board"><a href="#">게시판</a></li>
+					
+					<!--  관리자용 회원관리 메뉴 -->
+					<% if(memberLoggedIn != null && "admin".equals(memberLoggedIn.getMemberId())) { %>
+					<li class="admin"><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
+					<% } %>
 				</ul>
 			</nav>
 			<!-- 메인메뉴 끝 -->
