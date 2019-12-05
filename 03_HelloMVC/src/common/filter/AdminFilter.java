@@ -15,15 +15,15 @@ import javax.servlet.http.HttpSession;
 import member.model.vo.Member;
 
 /**
- * Servlet Filter implementation class MemberAuthFilter
+ * Servlet Filter implementation class AdminFilter
  */
-@WebFilter(servletNames = { "MemberViewServlet" })
-public class MemberAuthFilter implements Filter {
+@WebFilter("/admin/*")
+public class AdminFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public MemberAuthFilter() {
+    public AdminFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -36,24 +36,20 @@ public class MemberAuthFilter implements Filter {
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 * 
-	 * 로그인한 사용자가 다른 사용자의 상세보기 페이지를 요청하는 경우를 방지한다.
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//로그인한 사용자의 아이디 == memberView?memberId
-		HttpSession session = ((HttpServletRequest)request).getSession();
+		
+		HttpServletRequest httpReq = (HttpServletRequest)request;
+		HttpSession session = httpReq.getSession();
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		
-		//상세보기 요청사용자
-		String viewMemberId =  ((HttpServletRequest)request).getParameter("memberId");
-		
-		if(memberLoggedIn == null || !(memberLoggedIn.getMemberId().equals(viewMemberId) || "admin".equals(memberLoggedIn.getMemberId()))) {
+		if(memberLoggedIn == null || !"admin".equals(memberLoggedIn.getMemberId())) {
 			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 				   .forward(request, response);
-			return;
 			
+			return;
 		}
 		
 		// pass the request along the filter chain

@@ -15,7 +15,7 @@ public class MemberDAO {
 	private Properties prop = new Properties();
 	
 	public MemberDAO() {
-		String fileName = MemberDAO.class.getResource("/query.properties")
+		String fileName = MemberDAO.class.getResource("/sql/member/member-query.properties")
 										 .getPath();
 		
 		try {

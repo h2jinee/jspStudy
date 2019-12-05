@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberDeleteServlet
@@ -44,9 +45,13 @@ public class MemberDeleteServlet extends HttpServlet {
 		if(result>0) {
 			
 			msg = "성공적으로 회원삭제했습니다.";
-		
-			//회원탈퇴인 경우, 로그아웃 처리함.
-			loc = "/member/logout";
+			
+			Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");
+			if(!"admin".equals(memberLoggedIn.getMemberId())) {
+				//회원탈퇴인 경우, 로그아웃 처리함.
+				loc = "/member/logout";
+			}
+			
 		}
 		else 
 			msg = "회원삭제에 실패했습니다.";	

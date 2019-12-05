@@ -66,8 +66,14 @@ public class MemberUpdateServlet extends HttpServlet {
 		if(result>0) {
 			
 			msg = "성공적으로 회원수정했습니다.";
+			
+			Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");
+			
+			if(!"admin".equals(memberLoggedIn.getMemberId()))
 			//현재 session에 저장된 memberLoggedIn객체 반영
+			//이것 때문에 관리자가 회원들의 정보를 수정하게 되면 로그인이 관리자에서 수정한 회원으로 바뀌게 됨.
 			request.getSession().setAttribute("memberLoggedIn", member);
+			
 		}
 		else 
 			msg = "회원수정에 실패했습니다.";	
