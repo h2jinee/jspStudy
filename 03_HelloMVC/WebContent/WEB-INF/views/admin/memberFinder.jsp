@@ -4,6 +4,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
     List<Member> list = (List<Member>)request.getAttribute("list");
+
+	String searchKeyword = request.getParameter("searchKeyword");
+	String searchType = request.getParameter("searchType");
 %>
    
 <!-- 관리자용 css link -->
@@ -30,6 +33,9 @@ $(()=> {
 		$searchGender.hide();
 		
 		$("#search-"+$(this).val()).css("display","inline-block");
+		$("[type=search]").val("<%=searchKeyword%>");
+		
+		$(select).val("<%=searchType%>");
 	});
 });
 </script>
@@ -38,14 +44,15 @@ $(()=> {
 	<div id="search-container">
 		<label for="searchType">검색타입 : </label>
 		<select id="searchType">
-			<option value="memberId">아이디</option>
-			<option value="memberName">이름</option>
-			<option value="gender">성별</option>
+			<option value="memberId" <%="memberId".equals(searchType)?"selected":"" %>>아이디</option>
+			<option value="memberName" <%="memberName".equals(searchType)?"selected":"" %>>이름</option>
+			<option value="gender" <%="gender".equals(searchType)?"selected":"" %>>성별</option>
 		</select>
 		<div id="search-memberId">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberId" />
-				<input type="search" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요" />
+				
+				<input type="search" name="searchKeyword" size="25" value="<%=searchKeyword%>" placeholder="검색할 아이디를 입력하세요" />
 				<input type="submit" value="검색" />
 			</form>
 		</div>
