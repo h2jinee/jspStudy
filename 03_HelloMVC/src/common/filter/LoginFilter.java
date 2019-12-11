@@ -17,7 +17,10 @@ import member.model.vo.Member;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames = { "MemberViewServlet" })
+@WebFilter(servletNames = { "MemberViewServlet" },
+		   urlPatterns= {
+				   "/board/boardForm"
+		   })
 public class LoginFilter implements Filter {
 
     /**

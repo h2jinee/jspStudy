@@ -120,7 +120,7 @@ function goMemberEnroll(){
 				<ul class="main-nav">
 					<li class="home"><a href="<%=request.getContextPath()%>">Home</a></li>
 					<li class="notice"><a href="#">공지사항</a></li>
-					<li class="board"><a href="#">게시판</a></li>
+					<li class="board"><a href="<%=request.getContextPath()%>/board/boardList">게시판</a></li>
 					
 					<!--  관리자용 회원관리 메뉴 -->
 					<% if(memberLoggedIn != null && "admin".equals(memberLoggedIn.getMemberId())) { %>
