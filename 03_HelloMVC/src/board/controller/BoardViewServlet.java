@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
+import board.model.vo.BoardComment;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -63,7 +65,8 @@ public class BoardViewServlet extends HttpServlet {
 		
 		//2.업무로직
 		Board board = new BoardService().selectOne(boardNo, hasRead);
-		request.setAttribute("board", board);
+		List<BoardComment> commentList = new BoardService().selectCommentList(boardNo);
+		System.out.println("commentList@servlet="+commentList);
 		
 		
 		//3.view단처리:db에서 읽어온 Board객체가 null인 경우, msg.jsp를 통해서
@@ -76,7 +79,9 @@ public class BoardViewServlet extends HttpServlet {
 			view = "/WEB-INF/views/common/msg.jsp";
 		}
 		else {
-			view = "/WEB-INF/views/board/boardView.jsp";			
+			request.setAttribute("board", board);
+			request.setAttribute("commentList", commentList);
+			view = "/WEB-INF/views/board/boardView.jsp";	
 		}
 		request.getRequestDispatcher(view)
 			   .forward(request, response);

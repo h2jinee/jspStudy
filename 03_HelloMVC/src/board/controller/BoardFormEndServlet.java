@@ -58,6 +58,11 @@ public class BoardFormEndServlet extends HttpServlet {
 		String boardWriter = multiReq.getParameter("boardWriter");
 		String boardContent = multiReq.getParameter("boardContent");
 		
+		//XSS공격대비 & 문자변환
+		boardContent = boardContent.replaceAll("<", "&lt;")
+								   .replaceAll(">", "&gt;")
+								   .replaceAll("\\n", "<br/>");
+		
 		String originalFileName = multiReq.getOriginalFileName("upFile"); //사용자가 업로드한 파일명
 		String renamedFileName = multiReq.getFilesystemName("upFile"); //실제 저장된 파일명
 		
@@ -68,27 +73,27 @@ public class BoardFormEndServlet extends HttpServlet {
 		board.setOriginalFileName(originalFileName);
 		board.setRenamedFileName(renamedFileName);
 		
-		System.out.println("b@boardFordEnd="+board);
+		System.out.println("b@boardFormEnd="+board);
 		
 		//2. 비즈니스 로직 호출
 		int result = new BoardService().insertBoard(board);
 		
-		//3. 받은 결과에 따라 뷰페이지 내보내기
-				String view = "/WEB-INF/views/common/msg.jsp";
-				String msg = "";
-				String loc = "/";
-
-				if(result>0)
-					msg = "성공적으로 글을 등록 했습니다.";
-				else 
-					msg = "글 등록에 실패했습니다.";	
-				
-				request.setAttribute("msg", msg);
-				request.setAttribute("loc", loc);
-				
-				RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-				reqDispatcher.forward(request, response);
+		String msg = "";
+		String loc = "/board/boardView?boardNo="+board.getBoardNo();
 		
+		if(result>0) {
+			msg = "게시글 등록 성공!";
+		}
+		else {
+			msg = "게시글 등록 실패! 관리자에게 문의하세요.";
+		}
+		
+		
+		//3.view단 처리
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
+			   .forward(request, response);
 	}
 
 	/**

@@ -87,7 +87,7 @@ public class MemberLoginCheckServlet extends HttpServlet {
         		session.setAttribute("memberLoggedIn", m);
         		
         		//session유효시간 설정 : 초단위 (60 * 5 => 300초) web.xml보다 우선순위가 높다.
-        		session.setMaxInactiveInterval(60*30);
+        		session.setMaxInactiveInterval(60*1);
         		
         		//아이디저장 쿠키관련
         		//체크된 경우 : "on", 체크되지 않은 경우 : null
@@ -110,13 +110,19 @@ public class MemberLoginCheckServlet extends HttpServlet {
         			response.addCookie(c);
         		}
         		
+        		//로그인 후 페이지 리다이렉트
+        		String referer = request.getHeader("Referer");
+        		System.out.println(referer);
+        		
         		//reqDispatcher = request.getRequestDispatcher("/index.jsp");
         		//reqDispatcher.forward(request, response);
         		
         		//포워딩이 아닌 리다이렉트 처리
         		//3XX status code를 리턴.
         		//클라이언트에게 해당 주소로 재요청하게 함.
-        		response.sendRedirect(request.getContextPath());
+        		//response.sendRedirect(request.getContextPath()); // "/mvc"
+        		response.sendRedirect(referer); // "http://localhost:9090/mvc/board/boardView?boardNo=123"
+        		
         	}
         }
         
