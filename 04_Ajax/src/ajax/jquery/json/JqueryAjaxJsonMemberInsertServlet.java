@@ -19,14 +19,14 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class JQueryAjaxJSONServlet1
  */
-@WebServlet("/jquery/json/member/searchName")
-public class JqueryAjaxJsonMemberSearchNameServlet extends HttpServlet {
+@WebServlet("/jquery/json/member/insertMember")
+public class JqueryAjaxJsonMemberInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JqueryAjaxJsonMemberSearchNameServlet() {
+    public JqueryAjaxJsonMemberInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +39,22 @@ public class JqueryAjaxJsonMemberSearchNameServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		//2.파라미터값  가져오기
-		String srchName = request.getParameter("srchName");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String profile = request.getParameter("profile");
 		
-		//3.비지니스로직처리 : 해당하는 User찾기
+		//3.비지니스로직처리 
 		List<Member> list = MemberSingletone.getInstance().getList();
+		list.add(new Member(name, phone, profile));
 		
 		JSONArray jsonArray = new JSONArray();
-		
 		for(Member m : list) {
-			System.out.println(m);
-			System.out.println(m.getName());
-			if(m.getName().contains(srchName)) {
-				JSONObject jsonMember = new JSONObject();
-				jsonMember.put("name", m.getName());
-				jsonMember.put("phone", m.getPhone());
-				jsonMember.put("profile", m.getProfile());
-				jsonArray.add(jsonMember);
-			}
+			JSONObject jsonMember = new JSONObject();
+			jsonMember.put("name", m.getName());
+			jsonMember.put("phone", m.getPhone());
+			jsonMember.put("profile", m.getProfile());
+//			System.out.println(jsonMember);
+			jsonArray.add(jsonMember);
 		}
 		System.out.println(jsonArray);
 		

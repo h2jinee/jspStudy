@@ -24,5 +24,10 @@
 		<li><a href="<%=request.getContextPath()%>/jquery/xml/xml.jsp">jquery-ajax: xml</a></li>
 		<li><a href="<%=request.getContextPath()%>/jquery/json/json.jsp">jquery-ajax: json</a></li>
 	</ul>
+	
+	<h2>@실습문제: 스마트가전센터</h2>
+	<ul>
+		<li><a href="<%=request.getContextPath()%>/smart/smart.jsp">@실습문제</a></li>
+	</ul>
 </body>
 </html>
