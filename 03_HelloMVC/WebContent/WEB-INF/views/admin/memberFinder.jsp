@@ -4,10 +4,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
     List<Member> list = (List<Member>)request.getAttribute("list");
-	String pageBar = (String)request.getAttribute("pageBar");
 
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
    
 <!-- 관리자용 css link -->
@@ -21,8 +21,6 @@
 div#search-memberId {display:<%="memberId".equals(searchType)||searchType==null?"inline-block":"none"%>;}
 div#search-memberName {display:<%="memberName".equals(searchType)?"inline-block":"none"%>;}
 div#search-gender {display:<%="gender".equals(searchType)?"inline-block":"none"%>;}
-
-
 </style>
 <script>
 $(()=>{
@@ -110,7 +108,7 @@ $(()=>{
                 <td><%=m.getMemberName()%></td>
                 <td><%="M".equals(m.getGender())?"남":"여"%></td>
                 <td><%=m.getAge()%></td>
-                <td><%=m.getEmail()%></td>
+                <td><%=m.getEmail()!=null?m.getEmail():""%></td>
                 <td><%=m.getPhone()%></td>
                 <td><%=m.getAddress()!=null?m.getAddress():""%></td>
                 <td><%=m.getHobby()!=null?m.getHobby():""%></td>
@@ -122,7 +120,8 @@ $(()=>{
 		
 		</tbody>
 	</table>
-		<div id="pageBar">
+	
+	<div id="pageBar">
 		<%=pageBar %>
 	</div>
 	
